@@ -116,30 +116,22 @@ const program = (() => {
 
     container.appendChild(dlDomain);
 
+    container.appendChild(dlRegisterd);
+    container.appendChild(dlLastChange);
+    container.appendChild(dlExpires);
+
     if (dlRegistrantname != null) {
       container.appendChild(dlRegistrantname);
-    }
-    if (dlAddress != null) {
-      container.appendChild(dlAddress);
-    }
-    if (dlCity != null) {
-      container.appendChild(dlCity);
-    }
-    if (dlPostalCode != null) {
-      container.appendChild(dlPostalCode);
-    }
-    if (dlCountry != null) {
-      container.appendChild(dlCountry);
-    }
-    if (dlPhone != null) {
-      container.appendChild(dlPhone);
     }
     if (dlEmail != null) {
       container.appendChild(dlEmail);
     }
-    container.appendChild(dlRegisterd);
-    container.appendChild(dlExpires);
-    container.appendChild(dlLastChange);
+    if (dlAddress != null) {
+      container.appendChild(dlAddress);
+    }
+    if (dlCountry != null) {
+      container.appendChild(dlCountry);
+    }
   }
 
   function fetchData(domain) {
