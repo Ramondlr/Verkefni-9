@@ -7,25 +7,7 @@ const API_URL = 'https://apis.is/isnic?domain=';
 const program = (() => {
   let domains;
 
-  function displayLoading() {
-    const container = domains.querySelector('.results');
-
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
-    }
-
-    const loading = element('div'); /* eslint-disable-line */
-    loading.classList.add('loading');
-
-    const img = element('img'); /* eslint-disable-line */
-    img.setAttribute('src', 'loading.gif');
-
-    loading.appendChild(img);
-    loading.appendChild(document.createTextNode('Leita að léni...'));
-    container.appendChild(loading);
-  }
-
-  function element(name, child) {
+  function elements(name, child) {
     const el = document.createElement(name);
 
     if (typeof child === 'string') {
@@ -36,7 +18,25 @@ const program = (() => {
     return el;
   }
 
-  function displayElement(element, text) { /* eslint-disable-line */
+  function displayLoading() {
+    const container = domains.querySelector('.results');
+
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+
+    const loading = elements('div');
+    loading.classList.add('loading');
+
+    const img = elements('img');
+    img.setAttribute('src', 'loading.gif');
+
+    loading.appendChild(img);
+    loading.appendChild(document.createTextNode('Leita að léni...'));
+    container.appendChild(loading);
+  }
+
+  function displayElement(element, text) {
     const dl = document.createElement('dl');
 
     const domainElement = document.createElement('dt');
@@ -51,7 +51,7 @@ const program = (() => {
     return dl;
   }
 
-  function displayOptionalElement(element, text) { /* eslint-disable-line */
+  function displayOptionalElement(element, text) {
     if (element.length > 0) {
       const dl = document.createElement('dl');
 
