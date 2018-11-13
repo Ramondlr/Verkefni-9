@@ -1,11 +1,12 @@
 // const API_URL = '/example.json?domain=';
 const API_URL = 'https://apis.is/isnic?domain=';
+const domains = document.querySelector('.domains');
 
 /**
  * Leit að lénum á Íslandi gegnum apis.is
  */
 const program = (() => {
-  let domains;
+  const container = domains.querySelector('.results');
 
   function elements(name, child) {
     const el = document.createElement(name);
@@ -19,8 +20,6 @@ const program = (() => {
   }
 
   function displayLoading() {
-    const container = domains.querySelector('.results');
-
     while (container.firstChild) {
       container.removeChild(container.firstChild);
     }
@@ -70,7 +69,7 @@ const program = (() => {
   }
 
   function displayError(error) {
-    const container = domains.querySelector('.results');
+    const container = domains.querySelector('.results'); /* eslint-disable-line */
 
     while (container.firstChild) {
       container.removeChild(container.firstChild);
@@ -109,7 +108,7 @@ const program = (() => {
     const dlExpires = displayElement(ISOExpires, 'Rennur út');
     const dlLastChange = displayElement(ISOLastChange, 'Seinast breytt');
 
-    const container = domains.querySelector('.results');
+    const container = domains.querySelector('.results'); /* eslint-disable-line */
 
     while (container.firstChild) {
       container.removeChild(container.firstChild);
@@ -147,36 +146,34 @@ const program = (() => {
     displayLoading();
     fetch(`${API_URL}${domain}`)
       .then((response) => {
-        if (response.ok) {
-          return response.json();
+        if (!response.ok) {
+          return displayError('Villa við að sækja gögn');
         }
-
-        throw new Error('Villa við að sækja gögn');
+        return response.json();
       })
       .then((data) => {
         displayDomain(data.results);
       })
       .catch((error) => {
-        if (domain.length === 0) {
-          displayError('Lén verður að vera strengur');
-          console.error(error);
-        }
+        displayError('Villa við að sækja gögn');
+        console.error(error);
       });
   }
 
   function onSubmit(e) {
     e.preventDefault();
 
-    const input = e.target.querySelector('input');
-
-    fetchData(input.value);
+    const input = document.querySelector('input').value;
+    if (input.trim() === '') {
+      displayError('Lén verður að vera strengur');
+      document.querySelector('input').value = '';
+      return;
+    }
+    fetchData(input);
   }
 
   function init(_domains) {
-    domains = _domains;
-
-    const form = domains.querySelector('form');
-    form.addEventListener('submit', onSubmit);
+    _domains.addEventListener('submit', onSubmit);
   }
 
   return {
@@ -185,6 +182,5 @@ const program = (() => {
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
-  const domains = document.querySelector('.domains');
   program.init(domains);
 });
