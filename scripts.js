@@ -99,10 +99,10 @@ const program = (() => {
     const dlDomain = displayElement(domain, 'Lén');
     const dlRegistrantname = displayOptionalElement(registrantname, 'Skráningaraðili');
     const dlAddress = displayOptionalElement(address, 'Heimilisfang');
-    const dlCity = displayOptionalElement(city, 'Borg');
-    const dlPostalCode = displayOptionalElement(postalCode, 'Póstnúmer');
+    const dlCity = displayOptionalElement(city, 'Borg'); /* eslint-disable-line */
+    const dlPostalCode = displayOptionalElement(postalCode, 'Póstnúmer'); /* eslint-disable-line */
     const dlCountry = displayOptionalElement(country, 'Land');
-    const dlPhone = displayOptionalElement(phone, 'Símanúmer');
+    const dlPhone = displayOptionalElement(phone, 'Símanúmer'); /* eslint-disable-line */
     const dlEmail = displayOptionalElement(email, 'Netfang');
     const dlRegisterd = displayElement(ISORegistered, 'Skráð');
     const dlExpires = displayElement(ISOExpires, 'Rennur út');
